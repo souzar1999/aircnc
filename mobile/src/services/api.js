@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+//Acesso ao backend
 const api = axios.create({
-  baseURL: 'http://192.168.4.118:3333',
+  //ip deve ser alterado de acordo com o expo
+  baseURL: 'http://192.168.43.167:3333',
 });
 
 export default api;

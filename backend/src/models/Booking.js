@@ -1,3 +1,6 @@
+/*
+    Definindo Booking (Agendamentos de visita)
+*/
 const mongoose = require('mongoose');
 
 const BookingSchema = new mongoose.Schema({

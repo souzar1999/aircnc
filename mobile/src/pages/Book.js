@@ -4,9 +4,12 @@ import { Text, SafeAreaView, Alert, TextInput, StyleSheet, TouchableOpacity, Asy
 import api from '../services/api';
 
 export default function Book({ navigation }) {
+  //Variável data da visita
   const [date, setDate] = useState('');
+  //Id do spot selecionado
   const spot_id = navigation.getParam('id');
   
+  //Criação do booking com usuário logado, spot selecionado e data informada
   async function handleSubmit() {
     const user_id = await AsyncStorage.getItem('user');
 
@@ -15,7 +18,7 @@ export default function Book({ navigation }) {
     }, {
       headers: { user_id }
     })
-
+    
     Alert.alert('Solicitação de reserva enviada.');
 
     navigation.navigate('List');

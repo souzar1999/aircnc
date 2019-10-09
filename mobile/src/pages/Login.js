@@ -6,9 +6,12 @@ import api from '../services/api';
 import logo from '../assets/logo.png';
 
 export default function Login({ navigation }) {
+  //Email do usuário para login
   const [email, setEmail] = useState('');
+  //Tecnologia de interesse do usuário
   const [techs, setTechs] = useState('');
 
+  //Verifica se usuário já consta no AsyncStorage (Já fez login)
   useEffect(() => {
     AsyncStorage.getItem('user').then(user => {
       if (user) {
@@ -17,6 +20,8 @@ export default function Login({ navigation }) {
     })
   }, []);
   
+  //Cria usuário no banco de dados
+  //Adiciona usuário e technologias de interesse ao AsyncStorage
   async function handleSubmit() {
     const response = await api.post('sessions', {
       email

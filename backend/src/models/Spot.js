@@ -1,3 +1,6 @@
+/*
+    Definindo Spot (Locais)
+*/
 const mongoose = require('mongoose');
 
 const SpotSchema = new mongoose.Schema({
@@ -15,6 +18,7 @@ const SpotSchema = new mongoose.Schema({
     },
 })
 
+//Cria a variável virtual 'thumbnail_url' que retornará o link da respectiva thumbnail
 SpotSchema.virtual('thumbnail_url').get(function() {
     return `http://localhost:3333/files/${this.thumbnail}`
 })

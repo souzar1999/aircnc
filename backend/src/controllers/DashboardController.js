@@ -1,3 +1,7 @@
+/*
+    Controller do dashboard do usuário
+    Tendo retorno em json a todos os spots cadastrado por ele
+*/
 const Spot = require('../models/Spot');
 
 module.exports = {

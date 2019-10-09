@@ -5,8 +5,10 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react
 import api from '../services/api';
 
 function SpotList({ tech, navigation }) {
+  //array de spots
   const [spots, setSpots] = useState([]);
   
+  //carrega spots de acordo com tecnologia passada no .map do List.js
   useEffect(() => {
     async function loadSpots(){
       const response = await api.get('/spots', {
@@ -19,6 +21,7 @@ function SpotList({ tech, navigation }) {
     loadSpots();
   }, []);
 
+  //Acessar página para solicitar visita ao spot
   function handleNavigate(id) {
     navigation.navigate('Book', { id });
   }

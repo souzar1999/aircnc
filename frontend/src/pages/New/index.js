@@ -6,7 +6,7 @@ import camera from '../../assets/camera.svg';
 import './styles.css';
 
 export default function New({ history }){
-    
+    //cria variáveis do spot que serão adicionadas    
     const [thumbnail, setThumbnail] = useState(null);
     const [company, setCompany] = useState('');
     const [techs, setTechs] = useState('');
@@ -14,9 +14,9 @@ export default function New({ history }){
 
     const preview = useMemo(() => {
         return thumbnail ? URL.createObjectURL(thumbnail) : null;
-    },[thumbnail]
-    );
+    },[thumbnail]);
 
+    //Submit do form criando spot
     async function handleSubmit(event) {
         event.preventDefault();
         const data = new FormData();
@@ -31,6 +31,7 @@ export default function New({ history }){
             headers: {user_id}
         })
 
+        //envia para essa url
         history.push('/dashboard');
     }
 

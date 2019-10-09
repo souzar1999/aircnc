@@ -1,3 +1,7 @@
+/*
+    Arquivo de configuração de upload
+    Salva a thumbnail(imagem) do spot na pasta uploads
+*/
 const multer = require('multer');
 const path = require('path');
 

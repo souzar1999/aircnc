@@ -14,29 +14,26 @@ const io = socketio(server);
 
 const connectedUsers = {};
 
+//Conexão com o banco de dados mongodb
 mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-1cjpa.mongodb.net/semana09?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
 
+//Criação de um ID para cada usuário conectado ao backend
 io.on('connection', socket => {
     const { user_id } = socket.handshake.query;
 
     connectedUsers[user_id] = socket.id;
 });
 
+//Definindo resposta do app em json, rota para acesso aos uploads, rotas do arquivo routes.js
 app.use((req, res, next) => {
     req.io = io;
     req.connectedUsers = connectedUsers;
 
     return next();
 })
-
-// GET, POST, PUT, DELETE
-
-// req.query = Acessar query params (filtros)
-// req.params = Acessar route params (edição, delete)
-// req.body = Acessar corpo da requisição (criação, edição)
 
 app.use(cors());
 app.use(express.json());

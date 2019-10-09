@@ -1,3 +1,6 @@
+/*
+    Gerencia solicitação de agendamento de visita ao spot
+*/
 const Booking = require('../models/Booking');
 
 module.exports = {
@@ -16,6 +19,9 @@ module.exports = {
 
         const ownerSocket = req.connectedUsers[booking.spot.user];
 
+        /*
+            notifica usuário que cadastrou spot em tempo real
+        */
         if ( ownerSocket ) {
             req.io.to(ownerSocket).emit('booking_request', booking);
         }

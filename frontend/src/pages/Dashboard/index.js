@@ -1,3 +1,4 @@
+//Interface pós login onde usuário terá acesso aos spots criados por ele
 import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import socketio from 'socket.io-client';
@@ -6,22 +7,27 @@ import api from '../../services/api';
 import './styles.css';
 
 export default function Dashboard(){
+    //Variável dos spots
     const [spots, setSpots] = useState([]);
+    //Variável dos bookings que precisam de resposta
     const [requests, setRequests] = useState([]);
 
+    //Usuário logado
     const user_id = localStorage.getItem('user');
     const socket = useMemo(() => socketio('http://localhost:3333', {
         query: { user_id },
     }), [user_id]);
 
+    //Acessa quando booking é solicitado para criar solicitação em tempo real
     useEffect(() => {
         socket.on('booking_request', data => {
             setRequests([ ...requests, data]);
         })
     }, [requests, socket]);
 
+    //Busca spots do usuário conectado
     useEffect(() => {
-        //Executa essa função no início do component
+        //Executa essa função no início do componente
         async function loadSpots() {
             const user_id = localStorage.getItem('user');
             const response = await api.get('/dashboard', {
@@ -35,12 +41,14 @@ export default function Dashboard(){
         
     }, []);
 
+    //Função para aceitar booking
     async function handleAccept(id) {
         await api.post(`/bookings/${id}/approvals`);
 
         setRequests(requests.filter(request => request._id !== id));
     }
     
+    //Função para rejeitar booking
     async function handleReject(id) {
         await api.post(`/bookings/${id}/rejections`);
 

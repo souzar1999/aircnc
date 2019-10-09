@@ -1,7 +1,13 @@
+/*
+    Controller do spot
+*/
 const Spot = require('../models/Spot');
 const User = require('../models/User');
 
 module.exports = {
+    /*
+        Função assíncrona index retorna os spots da tecnologia cadastrada
+    */
     async index( req, res) {
         const { tech } = req.query;
 
@@ -10,6 +16,9 @@ module.exports = {
         return res.json( spots )
     },
 
+    /*
+        Função assíncrona store cadastra o spot
+    */
     async store( req, res) {
         const { filename } = req.file;
         const { company, techs, price } = req.body;
